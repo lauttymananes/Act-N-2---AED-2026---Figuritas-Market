@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
 <title>MundialMarket — Álbum digital de figuritas</title>
 <style>
   :root{
@@ -326,11 +327,114 @@
   @media (prefers-reduced-motion: reduce){
     *{ transition:none !important; animation:none !important; }
   }
+=======
+<title>Figuritas Market</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+    padding:20px;
+}
+
+header{
+    background:#0d47a1;
+    color:white;
+    padding:20px;
+    text-align:center;
+    border-radius:10px;
+    margin-bottom:20px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 2px 5px rgba(0,0,0,.2);
+    margin-bottom:20px;
+}
+
+h2{
+    margin-bottom:15px;
+    color:#0d47a1;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap:10px;
+}
+
+input, select{
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+button{
+    background:#0d47a1;
+    color:white;
+    border:none;
+    padding:12px;
+    border-radius:5px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button:hover{
+    background:#1565c0;
+}
+
+.filtro{
+    display:flex;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#0d47a1;
+    color:white;
+}
+
+th, td{
+    border:1px solid #ddd;
+    padding:10px;
+    text-align:center;
+}
+
+tr:nth-child(even){
+    background:#f9f9f9;
+}
+
+@media(max-width:768px){
+    table{
+        display:block;
+        overflow-x:auto;
+    }
+}
+>>>>>>> 9be824334dfb09b450442a48b759672c42ea9fca
 </style>
 </head>
 <body>
 
 <header>
+<<<<<<< HEAD
   <div class="header-inner">
     <div class="brand-row">
       <div>
@@ -806,3 +910,196 @@
 </script>
 </body>
 </html>
+=======
+    <h1>Figuritas Market</h1>
+    <p>Compra, Venta e Intercambio de Figuritas del Mundial</p>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>Nueva Publicación</h2>
+
+        <form id="formPublicacion">
+            <div class="form-grid">
+
+                <input type="number" id="id_publicacion" placeholder="ID Publicación" required>
+
+                <input type="number" id="id_fig" placeholder="ID Figurita" required>
+
+                <input type="text" id="pais" placeholder="País" required>
+
+                <input type="text" id="jugador" placeholder="Jugador" required>
+
+                <select id="rareza" required>
+                    <option value="">Rareza</option>
+                    <option>Común</option>
+                    <option>Especial</option>
+                    <option>Dorada</option>
+                    <option>Legendaria</option>
+                </select>
+
+                <select id="estado" required>
+                    <option value="">Estado</option>
+                    <option>Nueva</option>
+                    <option>Buena</option>
+                    <option>Regular</option>
+                </select>
+
+                <input type="number" id="precio" placeholder="Precio" required>
+
+                <select id="tipo_operacion" required>
+                    <option value="">Tipo de Operación</option>
+                    <option>Compra</option>
+                    <option>Venta</option>
+                    <option>Intercambio</option>
+                </select>
+
+            </div>
+
+            <br>
+            <button type="submit">Agregar Publicación</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>Filtrar Publicaciones</h2>
+
+        <div class="filtro">
+            <input type="text" id="filtroPais" placeholder="Ingrese un país">
+            <button onclick="filtrarPorPais()">Buscar</button>
+            <button onclick="mostrarPublicaciones()">Mostrar Todas</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Listado de Publicaciones</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID Publicación</th>
+                    <th>ID Fig</th>
+                    <th>País</th>
+                    <th>Jugador</th>
+                    <th>Rareza</th>
+                    <th>Estado</th>
+                    <th>Precio</th>
+                    <th>Operación</th>
+                </tr>
+            </thead>
+
+            <tbody id="tablaPublicaciones">
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<script>
+
+// Base de datos simulada
+const publicaciones = [
+{
+    id_publicacion: 1,
+    id_fig: 10,
+    pais: "Argentina",
+    jugador: "Messi",
+    rareza: "Legendaria",
+    estado: "Nueva",
+    precio: 5000,
+    tipo_operacion: "Venta"
+},
+{
+    id_publicacion: 2,
+    id_fig: 7,
+    pais: "Brasil",
+    jugador: "Vinicius Jr",
+    rareza: "Especial",
+    estado: "Buena",
+    precio: 2500,
+    tipo_operacion: "Intercambio"
+}
+];
+
+// Mostrar publicaciones
+function mostrarPublicaciones(lista = publicaciones){
+
+    const tabla = document.getElementById("tablaPublicaciones");
+    tabla.innerHTML = "";
+
+    lista.forEach(pub => {
+
+        tabla.innerHTML += `
+        <tr>
+            <td>${pub.id_publicacion}</td>
+            <td>${pub.id_fig}</td>
+            <td>${pub.pais}</td>
+            <td>${pub.jugador}</td>
+            <td>${pub.rareza}</td>
+            <td>${pub.estado}</td>
+            <td>$${pub.precio}</td>
+            <td>${pub.tipo_operacion}</td>
+        </tr>
+        `;
+    });
+}
+
+// Agregar publicación
+document.getElementById("formPublicacion")
+.addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+    const nuevaPublicacion = {
+        id_publicacion: Number(document.getElementById("id_publicacion").value),
+        id_fig: Number(document.getElementById("id_fig").value),
+        pais: document.getElementById("pais").value,
+        jugador: document.getElementById("jugador").value,
+        rareza: document.getElementById("rareza").value,
+        estado: document.getElementById("estado").value,
+        precio: Number(document.getElementById("precio").value),
+        tipo_operacion: document.getElementById("tipo_operacion").value
+    };
+
+    // Verificar clave única
+    const existe = publicaciones.some(
+        p => p.id_publicacion === nuevaPublicacion.id_publicacion
+    );
+
+    if(existe){
+        alert("Ya existe una publicación con ese ID.");
+        return;
+    }
+
+    publicaciones.push(nuevaPublicacion);
+
+    mostrarPublicaciones();
+
+    this.reset();
+});
+
+// Filtrar por país
+function filtrarPorPais(){
+
+    const paisBuscado =
+        document.getElementById("filtroPais")
+        .value
+        .trim()
+        .toLowerCase();
+
+    const resultado = publicaciones.filter(
+        p => p.pais.toLowerCase().includes(paisBuscado)
+    );
+
+    mostrarPublicaciones(resultado);
+}
+
+// Mostrar datos iniciales
+mostrarPublicaciones();
+
+</script>
+
+</body>
+</html>
+>>>>>>> 9be824334dfb09b450442a48b759672c42ea9fca
